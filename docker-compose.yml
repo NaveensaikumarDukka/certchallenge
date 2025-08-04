@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - COHERE_API_KEY=${COHERE_API_KEY}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+      - MODEL_NAME=gpt-4o
+      - TEMPERATURE=0.0
+      - MAX_TOKENS=4000
+      - CHUNK_SIZE=750
+      - CHUNK_OVERLAP=100
+      - VECTOR_STORE_TYPE=qdrant
+      - EMBEDDING_MODEL=text-embedding-3-small
+    volumes:
+      - ./backend/data:/app/data
+    networks:
+      - wealth-advisor-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://backend:8000
+      - NEXT_PUBLIC_DEV_MODE=false
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - wealth-advisor-network
+
+networks:
+  wealth-advisor-network:
+    driver: bridge
+
+volumes:
+  data: 

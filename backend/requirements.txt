@@ -1,0 +1,63 @@
+# FastAPI and web framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic>=2.7.4
+
+# LangChain and AI components
+langchain>=0.3.26
+langchain-openai==0.3.7
+langchain-community==0.3.27
+langchain-core>=0.3.35
+langchain-qdrant==0.2.0
+langchain-cohere==0.4.4
+
+# Vector database
+qdrant-client==1.13.2
+
+# Document processing
+pymupdf==1.26.3
+python-multipart==0.0.6
+
+# Search and data tools
+tavily-python==0.7.9
+arxiv==2.2.0
+yfinance==0.2.65
+
+# Evaluation framework
+ragas==0.2.10
+
+# Async and utilities
+asyncio==3.4.3
+aiofiles==23.2.1
+
+# HTTP and API
+httpx==0.25.2
+requests>=2.32.0
+
+# Data processing
+pandas>=2.2.0
+numpy>=2.2.2
+
+# Logging and monitoring
+structlog==23.2.0
+
+# Environment and configuration
+python-dotenv==1.0.0
+pydantic-settings>=2.4.0
+
+# CORS and middleware
+starlette==0.27.0
+
+# Development and testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+black==23.11.0
+isort==5.12.0
+flake8==6.1.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.4.8
+
+# Optional: For production deployment
+gunicorn==21.2.0 
