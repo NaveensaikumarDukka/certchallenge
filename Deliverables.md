@@ -103,9 +103,9 @@ Task 5: Creating a Golden Test Data Set
 
 1. Assess your pipeline using the RAGAS framework including key metrics faithfulness, response relevance, context precision, and context recall.  Provide a table of your output results.
 
-| context_recall | faithfulness |factual_correctness | answer_relevancy | context_entity_recall |noise_sensitivity_relevant |
+| Retriever | context_recall | faithfulness |factual_correctness | answer_relevancy | context_entity_recall |noise_sensitivity_relevant
 |-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
-|  0.9479   | 0.3912    | 0.2850    |0.8706    |0.5350    |0.0809   |
+| Basic    | 0.9479   | 0.3912    | 0.2850    |0.8706     |0.5350    |0.0809   |
 
 
 2. What conclusions can you draw about the performance and effectiveness of your pipeline with this information?
