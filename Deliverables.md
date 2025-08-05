@@ -94,103 +94,7 @@ Task 4: Building a Quick End-to-End Agentic RAG Prototype
 1. Build an end-to-end prototype and deploy it to a *local* endpoint
 Have built an end-to-end application and deployed to local endpoint using FastAPI Backend, REACT JS Front end and the complied notebook.
 
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                    FRONTEND LAYER                                   │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐                │
-│  │   Chat Interface │    │   Settings Modal │    │   Tool Status   │                │
-│  │                 │    │                 │    │                 │                │
-│  │ • User Input    │    │ • API Key Mgmt  │    │ • Tool Health   │                │
-│  │ • Message Display│    │ • Local Storage │    │ • Connection    │                │
-│  │ • Tool Badges   │    │ • Auto-save     │    │ • Status Check  │                │
-│  └─────────────────┘    └─────────────────┘    └─────────────────┘                │
-│           │                       │                       │                        │
-│           └───────────────────────┼───────────────────────┘                        │
-│                                   │                                                │
-└───────────────────────────────────┼────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                   API GATEWAY                                      │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐                │
-│  │   Next.js API   │    │   FastAPI Backend│    │   CORS Middleware│                │
-│  │   Routes        │    │   Endpoints     │    │                 │                │
-│  │                 │    │                 │    │                 │                │
-│  │ • /api/settings │    │ • /api/v1/query │    │ • Cross-origin  │                │
-│  │ • /api/chat     │    │ • /api/v1/tools │    │ • Authentication│                │
-│  │ • /api/status   │    │ • /api/v1/health│    │ • Rate Limiting │                │
-│  └─────────────────┘    └─────────────────┘    └─────────────────┘                │
-│           │                       │                                                │
-│           └───────────────────────┼────────────────────────────────────────────────┘
-│                                   │
-└───────────────────────────────────┼────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                  BACKEND LAYER                                     │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  ┌─────────────────────────────────────────────────────────────────────────────────┐ │
-│  │                        WEALTH ADVISOR SERVICE                                  │ │
-│  │                                                                                 │ │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │ │
-│  │  │ Query Router│  │ Tool Manager│  │ Response    │  │ Analytics   │          │ │
-│  │  │             │  │             │  │ Combiner    │  │ Tracker     │          │ │
-│  │  │ • Categorize│  │ • Initialize│  │ • Merge     │  │ • Usage     │          │ │
-│  │  │ • Route     │  │ • Reinit    │  │ • Format    │  │ • Metrics   │          │ │
-│  │  │ • Validate  │  │ • Monitor   │  │ • Context   │  │ • Health    │          │ │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘          │ │
-│  └─────────────────────────────────────────────────────────────────────────────────┘ │
-│                                   │                                                │
-│                                   ▼                                                │
-│  ┌─────────────────────────────────────────────────────────────────────────────────┐ │
-│  │                              TOOL ORCHESTRATION                                │ │
-│  │                                                                                 │ │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │ │
-│  │  │   TAVILY    │  │    ARXIV    │  │  YFINANCE   │  │     RAG     │          │ │
-│  │  │   SEARCH    │  │   RESEARCH  │  │   STOCK     │  │  KNOWLEDGE  │          │ │
-│  │  │             │  │             │  │    DATA     │  │    BASE     │          │ │
-│  │  │ • Web Search│  │ • Papers    │  │ • Real-time │  │ • PDF Docs  │          │ │
-│  │  │ • News      │  │ • Academic  │  │ • Prices    │  │ • Vector DB │          │ │
-│  │  │ • Market    │  │ • Research  │  │ • Financials│  │ • Embeddings│          │ │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘          │ │
-│  └─────────────────────────────────────────────────────────────────────────────────┘ │
-└───────────────────────────────────┼────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                 DATA LAYER                                         │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐                │
-│  │   PDF Processor │    │   Vector Store  │    │   API Services  │                │
-│  │                 │    │                 │    │                 │                │
-│  │ • PyMuPDF       │    │ • Qdrant DB     │    │ • OpenAI API    │                │
-│  │ • Text Extract  │    │ • Embeddings    │    │ • Tavily API    │                │
-│  │ • Chunking      │    │ • Similarity    │    │ • ArXiv API     │                │
-│  │ • Metadata      │    │ • Retrieval     │    │ • YFinance API  │                │
-│  └─────────────────┘    └─────────────────┘    └─────────────────┘                │
-│           │                       │                       │                        │
-│           └───────────────────────┼───────────────────────┘                        │
-│                                   │                                                │
-└───────────────────────────────────┼────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                                 STORAGE LAYER                                      │
-├─────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                     │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐                │
-│  │   Local Storage │    │   Session Cache │    │   File System   │                │
-│  │                 │    │                 │    │                 │                │
-│  │ • API Keys      │    │ • Environment   │    │ • PDF Documents │                │
-│  │ • User Prefs    │    │ • Variables     │    │ • Log Files     │                │
-│  │ • Chat History  │    │ • Temp Data     │    │ • Config Files  │                │
-│  └─────────────────┘    └─────────────────┘    └─────────────────┘                │
-└─────────────────────────────────────────────────────────────────────────────────────┘
+![](projectflowchart.png)
 
 
 Task 5: Creating a Golden Test Data Set
@@ -199,7 +103,7 @@ Task 5: Creating a Golden Test Data Set
 
 1. Assess your pipeline using the RAGAS framework including key metrics faithfulness, response relevance, context precision, and context recall.  Provide a table of your output results.
 
-| context_recall | faithfulness |factual_correctness | answer_relevancy | context_entity_recall |noise_sensitivity_relevant
+| context_recall | faithfulness |factual_correctness | answer_relevancy | context_entity_recall |noise_sensitivity_relevant |
 |-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
 |  0.9479   | 0.3912    | 0.2850    |0.8706    |0.5350    |0.0809   |
 
