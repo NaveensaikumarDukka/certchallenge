@@ -233,3 +233,6 @@ which shows the importance of advanced retrieval mechanisms.
 
 2. Articulate the changes that you expect to make to your app in the second half of the course. How will you improve your application?
     I want to improve the output through fine tuning in order to aling with the input context more also want to assess my application on BM25 Retriver.
+
+
+    LOOM Video: https://www.loom.com/share/2c3d24272cf146489a7afa2f28237ea7?sid=26757b55-eaf1-4571-8544-540913d1343a
